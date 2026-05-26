@@ -13,9 +13,17 @@ class ParkingSpot
     if available?
       @available = false
       puts "Spot occupied"
-      return @available
     else
       puts "Spot #{spot_no} is not available"
+    end
+  end
+
+  def unpark!
+    if !available?
+      @available = true
+      puts "Spot #{spot_no} released"
+    else
+      puts "Spot is not occupied"
     end
   end
 end
@@ -24,4 +32,5 @@ s1 = ParkingSpot.new(1)
 
 puts s1.spot_no
 puts s1.available?
-puts s1.park!
+s1.park!
+s1.unpark!
