@@ -1,7 +1,3 @@
-require_relative "vehicle"
-require_relative "parking-spot"
-require_relative "ticket"
-
 class ParkingLot
   include CalculateTime
   FORMAT = "%d-%m-%y %H:%M"
@@ -44,7 +40,7 @@ class ParkingLot
         spot.park!
         puts "#{license_plate_number} parked successfully"
       else
-        puts "No spot available at the movement"
+        puts "No spot Available"
       end
     end
   end
@@ -65,3 +61,5 @@ class ParkingLot
     end
   end
 end
+
+
