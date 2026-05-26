@@ -1,5 +1,8 @@
 class ParkingLot
-  attr_accessor :name, :spots, :vehicles, :tickets
+  include CalculateTime
+  FORMAT = "%d-%m-%y %H:%M"
+  attr_accessor :name, :spots, :vehichles, :tickets
+  
   def initialize(name)
     @name = name
     @spots = []
