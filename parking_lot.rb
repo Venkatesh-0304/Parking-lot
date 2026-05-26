@@ -1,5 +1,6 @@
 class ParkingLot
   include CalculateTime
+  include CalculateAmount
   FORMAT = "%d-%m-%y %H:%M"
   attr_accessor :name, :spots, :vehichles, :tickets
   
@@ -53,11 +54,17 @@ class ParkingLot
     vehicle = find_vehicle(license_plate_number)
     if vehicle != nil
       ticket = find_ticket(license_plate_number)
+      entry_time = ticket.entry_time
       spot_no = ticket.spot_no
       spot = find_spot(spot_no)
       spot.unpark!
+      exit_time = (Time.now + (3600 * 4) + ((3600 / 60)*30))
+      duration = calculate_time(entry_time, exit_time).to_f
       @tickets.delete(ticket)
       puts "#{license_plate_number} unparked successfully"
+      fee = calculate_amount(duration)
+    else
+      puts "Vehicle is not Parked here"
     end
   end
 end
