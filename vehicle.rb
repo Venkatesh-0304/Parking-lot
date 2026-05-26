@@ -5,6 +5,6 @@ class Vehicle
   end
 end
 
-v1 = Vehicle.new("ka-05-0376")
+# v1 = Vehicle.new("ka-05-0376")
 
-puts v1.license_plate_number
+# puts v1.license_plate_number
