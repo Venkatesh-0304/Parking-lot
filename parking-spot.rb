@@ -1,5 +1,5 @@
 class ParkingSpot
-  attr_accessor :spot_no, :available
+  attr_accessor :spot_no
   def initialize(spot_no)
     @spot_no = spot_no
     @available = true
@@ -12,7 +12,6 @@ class ParkingSpot
   def park!
     if available?
       @available = false
-      puts "Spot occupied"
     else
       puts "Spot #{spot_no} is not available"
     end
@@ -21,7 +20,6 @@ class ParkingSpot
   def unpark!
     if !available?
       @available = true
-      puts "Spot #{spot_no} released"
     else
       puts "Spot is not occupied"
     end
