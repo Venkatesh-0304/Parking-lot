@@ -16,14 +16,13 @@ class ParkingLot
   end
 
   def find_available_spot
-    available_spot = @spots.find { |s| s.available?}
+    @spots.find { |s| s.available?}
   end
 
-  # def show_spots
-  #   @spots.each do |s|
-  #     puts "#{s.spot_no} #{s.available?}"
-  #   end
-  # end
+  def find_spot(spot_no)
+    @spots.find {|s| s.spot_no == spot_no}
+  end
+
 
   def find_vehicle(license_plate_number)
     @vehicles.find {|v| v.license_plate_number == license_plate_number}
@@ -44,6 +43,22 @@ class ParkingLot
       end
     end
   end
+
+  def find_ticket(license_plate_number)
+    @tickets.find {|t| t.license_plate_number == license_plate_number}
+  end
+
+  def unpark_vehicle(license_plate_number)
+    vehicle = find_vehicle(license_plate_number)
+    if vehicle != nil
+      ticket = find_ticket(license_plate_number)
+      spot_no = ticket.spot_no
+      spot = find_spot(spot_no)
+      spot.unpark!
+      @tickets.delete(ticket)
+      puts "#{license_plate_number} unparked successfully"
+    end
+  end
 end
 
 pl1 = ParkingLot.new("Garuda")
@@ -52,3 +67,4 @@ puts pl1.name
 pl1.add_spot(2)
 pl1.add_spot(3)
 pl1.park_vehicle("ka-o5-ju-0376")
+pl1.unpark_vehicle("ka-o5-ju-0376")
