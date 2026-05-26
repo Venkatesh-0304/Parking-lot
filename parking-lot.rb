@@ -44,6 +44,11 @@ class ParkingLot
       end
     end
   end
+
+  def unpark_vehicle(license_plate_number)
+    
+    
+  end
 end
 
 pl1 = ParkingLot.new("Garuda")
@@ -52,3 +57,4 @@ puts pl1.name
 pl1.add_spot(2)
 pl1.add_spot(3)
 pl1.park_vehicle("ka-o5-ju-0376")
+pl1.unpark_vehicle("ka-o5-ju-0376")
