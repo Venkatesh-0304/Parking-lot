@@ -23,7 +23,6 @@ class ParkingLot
     @spots.find {|s| s.spot_no == spot_no}
   end
 
-
   def find_vehicle(license_plate_number)
     @vehicles.find {|v| v.license_plate_number == license_plate_number}
   end
