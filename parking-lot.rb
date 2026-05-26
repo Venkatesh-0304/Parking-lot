@@ -16,7 +16,7 @@ class ParkingLot
   end
 
   def find_available_spot
-    available_spot = @spots.find { |s| s.available?}
+    @spots.find { |s| s.available?}
   end
 
   # def show_spots
@@ -43,11 +43,6 @@ class ParkingLot
         puts "#{license_plate_number} parked successfully"
       end
     end
-  end
-
-  def unpark_vehicle(license_plate_number)
-    
-    
   end
 end
 
