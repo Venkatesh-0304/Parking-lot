@@ -28,9 +28,4 @@ class ParkingSpot
   end
 end
 
-# s1 = ParkingSpot.new(1)
 
-# puts s1.spot_no
-# puts s1.available?
-# s1.park!
-# s1.unpark!
