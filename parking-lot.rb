@@ -3,9 +3,7 @@ require_relative "parking-spot"
 require_relative "ticket"
 
 class ParkingLot
-  FORMAT = "%d-%m-%y %H:%M"
-  attr_accessor :name, :spots, :vehichles, :tickets
-  
+  attr_accessor :name, :spots, :vehicles, :tickets
   def initialize(name)
     @name = name
     @spots = []
@@ -43,7 +41,7 @@ class ParkingLot
         spot.park!
         puts "#{license_plate_number} parked successfully"
       else
-        puts "No spot available at the movement"
+        puts "No spot Available"
       end
     end
   end
@@ -64,3 +62,15 @@ class ParkingLot
     end
   end
 end
+
+pl1 = ParkingLot.new("Garuda")
+
+puts pl1.name
+pl1.add_spot(2)
+pl1.add_spot(3)
+pl1.park_vehicle("ka-o5-ju-0376")
+pl1.park_vehicle("ka-o5-ju-0377")
+pl1.park_vehicle("ka-o5-ju-0378")
+
+
+pl1.unpark_vehicle("ka-o5-ju-0376")
