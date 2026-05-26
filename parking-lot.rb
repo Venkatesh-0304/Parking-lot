@@ -1,8 +1,10 @@
 require_relative "vehicle"
 require_relative "parking-spot"
 require_relative "ticket"
+
 class ParkingLot
   attr_accessor :name, :spots, :vehichles, :tickets
+  
   def initialize(name)
     @name = name
     @spots = []
