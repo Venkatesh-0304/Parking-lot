@@ -7,6 +7,10 @@ class Ticket
     @status = true
     @entry_time = time.strftime("%d-%m-%y %H:%M")
   end
+
+  def status?
+    @status
+  end
 end
 
 t1 = Ticket.new("ka-05-ju-0376", 1)
