@@ -16,7 +16,7 @@ class ParkingLot
   end
 
   def find_available_spot
-    available_spot = @spots.find { |s| s.available?}
+    @spots.find { |s| s.available?}
   end
 
   # def show_spots
