@@ -3,6 +3,7 @@ require_relative "parking-spot"
 require_relative "ticket"
 
 class ParkingLot
+  include CalculateTime
   FORMAT = "%d-%m-%y %H:%M"
   attr_accessor :name, :spots, :vehichles, :tickets
   
