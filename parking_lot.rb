@@ -1,8 +1,3 @@
-require_relative "time"
-require_relative "calculate_amount"
-require_relative "ticket"
-require_relative "parking_spot"
-require_relative "vehicle"
 class ParkingLot
   include CalculateTime
   include CalculateAmount
@@ -22,10 +17,8 @@ class ParkingLot
     puts "Spot no : #{spot_no} and Spot type: #{spot_type} added"
   end
 
-  def find_available_spot(vehicle_type)
-    @spots.find do |spot|
-      spot.available? && spot.can_fit?(vehicle_type)
-    end
+  def find_available_spot(spot_type)
+    @spots.find { |s| s.spot_type == spot_type && s.available?}
   end
 
   def find_spot(spot_no)
@@ -39,31 +32,32 @@ class ParkingLot
   def park_vehicle(license_plate_number, vehicle_type)
     if find_vehicle(license_plate_number) != nil
       puts "Cannot park vehicle which is already Parked #{license_plate_number}"
-
-    else
-      spot = find_available_spot(vehicle_type)
+    else 
+      required_spot_type = nil
+      if vehicle_type == "Bike" 
+        required_spot_type = "compact"
+      elsif vehicle_type == "Car"
+        required_spot_type = "regular"
+      else
+        puts "Invalid Vehicle type"
+        return
+      end
+      spot = find_available_spot(required_spot_type)
       if spot != nil
-        if type == "bike"    
-          vehicle = Bike.new(license_plate_number)
-          @vehicles << vehicle
-        elsif type == "car"
-          vehicle = Car.new(license_plate_number)
-          @vehicles << vehicle
-        elsif type == "truck"
-          vehicle = Truck.new(license_plate_number)
-          @vehicles << vehicle
+        if vehicle_type == "Bike"
+          vehicle = Bike.new(license_plate_number, vehicle_type)
+        elsif vehicle_type == "Car"
+          vehicle = Car.new(license_plate_number, vehicle_type)
         else
-          puts "Invalid Vehicle type"
+          puts "Invalid vehicle type"
           return
         end
+        @vehicles << vehicle
         ticket = Ticket.new(vehicle, spot)
         @tickets << ticket
-
         spot.park!
-        puts "vehicle : #{vehicle_type}(#{license_plate_number})parked successfully"
-
+        puts "#{license_plate_number} parked successfully"
       else
-
         puts "No spot Available"
       end
     end
@@ -77,21 +71,13 @@ class ParkingLot
     vehicle = find_vehicle(license_plate_number)
     if vehicle != nil
       ticket = find_ticket(license_plate_number)
-
       entry_time = ticket.entry_time
       spot_no = ticket.spot_no
-
       spot = find_spot(spot_no)
-
       spot.unpark!
-
       exit_time = (Time.now + (3600 * 4) + ((3600 / 60)*30))
       duration = calculate_time(entry_time, exit_time).to_f
-
       @tickets.delete(ticket)
-
-      @vehicles.delete(vehicle)
-
       puts "#{license_plate_number} unparked successfully"
       calculate_amount(duration)
     else
@@ -99,5 +85,3 @@ class ParkingLot
     end
   end
 end
-
-
