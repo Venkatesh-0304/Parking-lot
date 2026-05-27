@@ -4,3 +4,13 @@ class Vehicle
     @license_plate_number = license_plate_number
   end
 end
+
+class Bike < Vehicle
+end
+
+class Car < Vehicle
+end
+
+class Truck < Vehicle
+end
+
