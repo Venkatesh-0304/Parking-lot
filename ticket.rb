@@ -7,8 +7,4 @@ class Ticket
     @status = true
     @entry_time = Time.now
   end
-
-  def status?
-    @status
-  end
 end
