@@ -11,9 +11,10 @@ class ParkingLot
     @tickets = []
   end
   
-  def add_spot(spot_no)
-    spot = ParkingSpot.new(spot_no)
+  def add_spot(spot_no, spot_type)
+    spot = ParkingSpot.new(spot_no, spot_type)
     @spots << spot
+    puts "spot no : #{spot_no} and spot type: #{spot_type} added"
   end
 
   def find_available_spot
