@@ -25,18 +25,6 @@ class ParkingSpot
       puts "Spot is not occupied"
     end
   end
-
-  def can_fit?(vehicle_type)
-    if vehicle_type == "motorcycle"
-      true
-    elsif vehicle_type == "car"
-      @spot_type == "regular" || @spot_type == "oversized"
-    elsif vehicle_type == "truck"
-      @spot_type == "oversized"
-    else
-      puts "No spot is available for this vehicle"
-    end
-  end
 end
 
 
