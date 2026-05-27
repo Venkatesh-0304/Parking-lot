@@ -1,4 +1,4 @@
-require_relative "time"
+require_relative "calculate_time"
 require_relative "calculate_amount"
 require_relative "parking_spot"
 require_relative "vehicle"
