@@ -1,8 +1,8 @@
 class ParkingLot
   include CalculateTime
   include CalculateAmount
-  FORMAT = "%d-%m-%y %H:%M"
-  attr_accessor :name, :spots, :vehichles, :tickets
+  attr_accessor :name, :spots, :vehicles, :tickets
+
   
   def initialize(name)
     @name = name
@@ -11,13 +11,14 @@ class ParkingLot
     @tickets = []
   end
   
-  def add_spot(spot_no)
-    spot = ParkingSpot.new(spot_no)
+  def add_spot(spot_no, spot_type)
+    spot = ParkingSpot.new(spot_no, spot_type)
     @spots << spot
+    puts "Spot no : #{spot_no} and Spot type: #{spot_type} added"
   end
 
-  def find_available_spot
-    @spots.find { |s| s.available?}
+  def find_available_spot(spot_type)
+    @spots.find { |s| s.spot_type == spot_type && s.available?}
   end
 
   def find_spot(spot_no)
@@ -28,13 +29,29 @@ class ParkingLot
     @vehicles.find {|v| v.license_plate_number == license_plate_number}
   end
 
-  def park_vehicle(license_plate_number)
+  def park_vehicle(license_plate_number, vehicle_type)
     if find_vehicle(license_plate_number) != nil
       puts "Cannot park vehicle which is already Parked #{license_plate_number}"
-    else
-      spot = find_available_spot
+    else 
+      required_spot_type = nil
+      if vehicle_type == "Bike" 
+        required_spot_type = "compact"
+      elsif vehicle_type == "Car"
+        required_spot_type = "regular"
+      else
+        puts "Invalid Vehicle type"
+        return
+      end
+      spot = find_available_spot(required_spot_type)
       if spot != nil
-        vehicle = Vehicle.new(license_plate_number)
+        if vehicle_type == "Bike"
+          vehicle = Bike.new(license_plate_number, vehicle_type)
+        elsif vehicle_type == "Car"
+          vehicle = Car.new(license_plate_number, vehicle_type)
+        else
+          puts "Invalid vehicle type"
+          return
+        end
         @vehicles << vehicle
         ticket = Ticket.new(vehicle, spot)
         @tickets << ticket
@@ -62,11 +79,9 @@ class ParkingLot
       duration = calculate_time(entry_time, exit_time).to_f
       @tickets.delete(ticket)
       puts "#{license_plate_number} unparked successfully"
-      fee = calculate_amount(duration)
+      calculate_amount(duration)
     else
       puts "Vehicle is not Parked here"
     end
   end
 end
-
-
