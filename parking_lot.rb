@@ -1,8 +1,13 @@
+require_relative "time"
+require_relative "calculate_amount"
+require_relative "ticket"
+require_relative "parking_spot"
+require_relative "vehicle"
 class ParkingLot
   include CalculateTime
   include CalculateAmount
-  FORMAT = "%d-%m-%y %H:%M"
-  attr_accessor :name, :spots, :vehichles, :tickets
+  attr_accessor :name, :spots, :vehicles, :tickets
+
   
   def initialize(name)
     @name = name
@@ -38,10 +43,19 @@ class ParkingLot
     else
       spot = find_available_spot(vehicle_type)
       if spot != nil
-
-        vehicle = Vehicle.new(license_plate_number, vehicle_type)
-        @vehicles << vehicle
-
+        if type == "bike"    
+          vehicle = Bike.new(license_plate_number)
+          @vehicles << vehicle
+        elsif type == "car"
+          vehicle = Car.new(license_plate_number)
+          @vehicles << vehicle
+        elsif type == "truck"
+          vehicle = Truck.new(license_plate_number)
+          @vehicles << vehicle
+        else
+          puts "Invalid Vehicle type"
+          return
+        end
         ticket = Ticket.new(vehicle, spot)
         @tickets << ticket
 
