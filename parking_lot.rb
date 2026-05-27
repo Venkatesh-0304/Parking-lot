@@ -11,9 +11,10 @@ class ParkingLot
     @tickets = []
   end
   
-  def add_spot(spot_no)
-    spot = ParkingSpot.new(spot_no)
+  def add_spot(spot_no, spot_type)
+    spot = ParkingSpot.new(spot_no, spot_type)
     @spots << spot
+    puts "Spot no : #{spot_no} and Spot type: #{spot_type} added"
   end
 
   def find_available_spot
@@ -62,7 +63,7 @@ class ParkingLot
       duration = calculate_time(entry_time, exit_time).to_f
       @tickets.delete(ticket)
       puts "#{license_plate_number} unparked successfully"
-      fee = calculate_amount(duration)
+      calculate_amount(duration)
     else
       puts "Vehicle is not Parked here"
     end

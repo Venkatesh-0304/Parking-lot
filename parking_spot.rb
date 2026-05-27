@@ -1,7 +1,8 @@
 class ParkingSpot
-  attr_accessor :spot_no
-  def initialize(spot_no)
+  attr_accessor :spot_no, :spot_type
+  def initialize(spot_no, spot_type)
     @spot_no = spot_no
+    @spot_type = spot_type
     @available = true
   end
 
