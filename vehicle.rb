@@ -5,6 +5,9 @@ class Vehicle
   end
 end
 
+class Bike < Vehicle
+end
+
 class Car < Vehicle
 end
 
