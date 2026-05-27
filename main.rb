@@ -1,8 +1,8 @@
 require_relative "time"
 require_relative "calculate_amount"
-require_relative "parking-spot"
+require_relative "parking_spot"
 require_relative "vehicle"
-require_relative "parking-lot"
+require_relative "parking_lot"
 require_relative "ticket"
 
 
