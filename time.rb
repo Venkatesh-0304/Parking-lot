@@ -7,10 +7,6 @@ module CalculateTime
     duration_seconds = exit - entry
     hours = (duration_seconds / 3600).to_i
     minutes = (((duration_seconds / 3600) * 60)% 60).to_i
-<<<<<<< HEAD
     return "#{hours}.#{minutes}"
-=======
-    return hours,minutes
->>>>>>> ed15b9e (added CalculateTime module and tested)
   end
 end
