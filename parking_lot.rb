@@ -74,12 +74,13 @@ class ParkingLot
       entry_time = ticket.entry_time
       spot_no = ticket.spot_no
       spot = find_spot(spot_no)
+      spot_type = spot.spot_type
       spot.unpark!
       exit_time = (Time.now + (3600 * 4) + ((3600 / 60)*30))
       duration = calculate_time(entry_time, exit_time).to_f
       @tickets.delete(ticket)
       puts "#{license_plate_number} unparked successfully"
-      calculate_amount(duration)
+      calculate_amount(duration, spot_type)
     else
       puts "Vehicle is not Parked here"
     end
