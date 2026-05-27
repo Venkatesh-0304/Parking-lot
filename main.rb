@@ -5,7 +5,6 @@ require_relative "vehicle"
 require_relative "parking_lot"
 require_relative "ticket"
 
-
 pl1 = ParkingLot.new("Garuda")
 
 puts pl1.name
@@ -18,3 +17,5 @@ pl1.park_vehicle("ka-05-ju-0379", "Car")
 
 pl1.unpark_vehicle("ka-05-ju-0377")
 pl1.unpark_vehicle("ka-05-ju-0378")
+
+pl1.unpark_vehicle("ka-o5-ju-0376")
