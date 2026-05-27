@@ -2,7 +2,7 @@ class ParkingLot
   include CalculateTime
   include CalculateAmount
   FORMAT = "%d-%m-%y %H:%M"
-  attr_accessor :name, :spots, :vehichles, :tickets
+  attr_accessor :name, :spots, :vehicles, :tickets
   
   def initialize(name)
     @name = name
